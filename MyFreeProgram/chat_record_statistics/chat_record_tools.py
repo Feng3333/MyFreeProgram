@@ -39,6 +39,8 @@ def filter_person_name(content_list):
             person_number = person_info.split('(')[1][:-1]
             person_info_list[person_number] = person_name
             cur_person = person_number
+            # continue: person information is not counted in the number of chatting
+            continue
         elif cur_person is not None:
             each_person_chat_contents[cur_person].append(content)
             all_chat_contents.append(content)
