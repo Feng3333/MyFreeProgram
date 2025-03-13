@@ -8,7 +8,7 @@ from collections import defaultdict
 from data_to_excel_table import chat_record_data_to_excel_process
 
 # PERSON_INFO_PATTERN ：人名+(首字母开头的工号)
-PERSON_INFO_PATTERN = r"^[\u4e00-\u9fa5]+\([a-zA-Z0-9]+\)"
+PERSON_INFO_PATTERN = r"^[\u4e00-\u9fa5]+\([a-zA-Z0-9_]+\)"
 
 
 def read_chat_record_file(file_path):
@@ -46,6 +46,7 @@ def filter_person_name(content_list):
             all_chat_contents.append(content)
         else:
             all_chat_contents.append(content)
+
         if person_number not in person_chat_frequency:
             person_chat_frequency[cur_person] = 1
         else:
