@@ -8,7 +8,7 @@ from collections import defaultdict
 from data_to_excel_table import chat_record_data_to_excel_process
 
 # PERSON_INFO_PATTERN ：人名+(首字母开头的工号)
-PERSON_INFO_PATTERN = r"^[\u4e00-\u9fa5]+\([a-zA-Z0-9_]+\)"
+PERSON_INFO_PATTERN = r"^[a-zA-Z\d\s\u4e00-\u9fa5]+\([a-zA-Z0-9_]+\)"
 
 
 def read_chat_record_file(file_path):
@@ -34,6 +34,8 @@ def filter_person_name(content_list):
     for content in content_list:
         # Determine whether the content is personal information
         person_info = content.split('\t')[0]
+        if content == "\n" or content == "\r":
+            continue
         if re.match(PERSON_INFO_PATTERN, person_info):
             person_name = person_info.split('(')[0]
             person_number = person_info.split('(')[1][:-1]
